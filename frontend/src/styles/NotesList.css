@@ -1,0 +1,85 @@
+.notes-container {
+  padding: 2rem;
+}
+
+.notes-container h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.empty-message {
+  text-align: center;
+  color: #999;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+.notes-container.error {
+  color: #d32f2f;
+  padding: 1rem;
+  background-color: #ffebee;
+  border-radius: 4px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.note-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.note-card h3 {
+  margin: 0 0 0.75rem 0;
+  color: #333;
+  word-break: break-word;
+}
+
+.note-card p {
+  color: #666;
+  margin: 0 0 1rem 0;
+  flex-grow: 1;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.note-card small {
+  color: #999;
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.delete-btn:hover {
+  background-color: #da190b;
+}
+
+.delete-btn:active {
+  transform: scale(0.98);
+}
