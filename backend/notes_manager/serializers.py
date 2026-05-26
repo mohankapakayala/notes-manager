@@ -1,8 +1,10 @@
 from rest_framework import serializers
-from .models import User
+from .models import Note
 
 
-class UserSerializer(serializers.ModelSerializer):
+
+
+class NoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model=User
-        fields=['name']
+        model=Note
+        fields = '__all__'
