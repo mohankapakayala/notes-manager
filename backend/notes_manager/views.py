@@ -23,3 +23,11 @@ def create_note(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@api_view(['DELETE'])
+def delete_note(request, id):
+    try:
+        note = Note.objects.get(id=id)
+        note.delete()
+        return Response({"message": "Note deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    except Note.DoesNotExist:
+        return Response({"error": "Note not found"}, status=status.HTTP_404_NOT_FOUND)
