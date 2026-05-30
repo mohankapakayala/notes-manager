@@ -1,6 +1,6 @@
-import { useState, useEffect, FC } from 'react';
-import axios from 'axios';
-import '../styles/NotesList.css';
+import { useState, useEffect, FC } from "react";
+import axios from "axios";
+import "../styles/NotesList.css";
 
 interface Note {
   id: string;
@@ -18,7 +18,7 @@ const NotesList: FC<NotesListProps> = ({ refreshTrigger }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = 'http://localhost:5000/api/notes';
+  const API_URL = "http://127.0.0.1:8000/notes/";
 
   const fetchNotes = async (): Promise<void> => {
     setLoading(true);
@@ -27,7 +27,7 @@ const NotesList: FC<NotesListProps> = ({ refreshTrigger }) => {
       const response = await axios.get<Note[]>(API_URL);
       setNotes(response.data);
     } catch (err) {
-      setError('Failed to fetch notes');
+      setError("Failed to fetch notes");
       console.error(err);
     } finally {
       setLoading(false);
@@ -41,21 +41,33 @@ const NotesList: FC<NotesListProps> = ({ refreshTrigger }) => {
   const deleteNote = async (id: string): Promise<void> => {
     try {
       await axios.delete(`${API_URL}/${id}`);
-      setNotes(notes.filter(note => note.id !== id));
+      setNotes(notes.filter((note) => note.id !== id));
     } catch (err) {
-      setError('Failed to delete note');
+      setError("Failed to delete note");
       console.error(err);
     }
   };
 
-  if (loading && notes.length === 0) return <div className="notes-container"><p>Loading notes...</p></div>;
-  if (error) return <div className="notes-container error"><p>{error}</p></div>;
+  if (loading && notes.length === 0)
+    return (
+      <div className="notes-container">
+        <p>Loading notes...</p>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="notes-container error">
+        <p>{error}</p>
+      </div>
+    );
 
   return (
     <div className="notes-container">
       <h2>My Notes</h2>
       {notes.length === 0 ? (
-        <p className="empty-message">No notes yet. Create one to get started!</p>
+        <p className="empty-message">
+          No notes yet. Create one to get started!
+        </p>
       ) : (
         <div className="notes-grid">
           {notes.map((note: Note) => (
