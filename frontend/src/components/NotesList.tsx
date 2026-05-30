@@ -19,6 +19,7 @@ const NotesList: FC<NotesListProps> = ({ refreshTrigger }) => {
   const [error, setError] = useState<string | null>(null);
 
   const API_URL = "http://127.0.0.1:8000/notes/";
+  const DELETE_API_URL = "http://127.0.0.1:8000/notes/delete";
 
   const fetchNotes = async (): Promise<void> => {
     setLoading(true);
@@ -40,7 +41,7 @@ const NotesList: FC<NotesListProps> = ({ refreshTrigger }) => {
 
   const deleteNote = async (id: string): Promise<void> => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${DELETE_API_URL}/${id}/`);
       setNotes(notes.filter((note) => note.id !== id));
     } catch (err) {
       setError("Failed to delete note");
