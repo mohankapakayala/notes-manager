@@ -1,15 +1,23 @@
-FROM node:jod-alpine3.23
+FROM node:20-alpine3.18 AS build
 
 WORKDIR /frontend
 
-COPY package.json .
+COPY package.json yarn.lock ./
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 COPY . .
 
 RUN yarn run build
 
-EXPOSE 3000
 
-CMD ["yarn", "start"]
+FROM nginx:alpine
+
+COPY --from=build /frontend/build /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+

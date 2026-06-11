@@ -13,7 +13,8 @@ const AddNoteForm: FC<AddNoteFormProps> = ({ onNoteAdded }) => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const API_URL = "http://127.0.0.1:8000/notes/add/";
+  const API_URL = process.env.REACT_APP_ADD_API_URL || "";
+  console.debug(API_URL, "api url");
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
